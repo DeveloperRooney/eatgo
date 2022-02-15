@@ -1,5 +1,7 @@
 package com.hancoding.eatgo.web;
 
+import com.hancoding.eatgo.domain.MenuItem;
+import com.hancoding.eatgo.domain.MenuItemRepository;
 import com.hancoding.eatgo.domain.Restaurant;
 import com.hancoding.eatgo.domain.RestaurantRepositoryImpl;
 import lombok.RequiredArgsConstructor;
@@ -13,15 +15,21 @@ import java.util.List;
 @RestController
 public class RestaurantController {
 
-    private final RestaurantRepositoryImpl repository;
+    private final RestaurantRepositoryImpl restaurantRepository;
+    private final MenuItemRepository menuItemRepository;
 
     @GetMapping("/restaurants")
     public List<Restaurant> list() {
-        return repository.findAll();
+        return restaurantRepository.findAll();
     }
 
     @GetMapping("/restaurants/{id}")
     public Restaurant detail(@PathVariable("id") Long id) {
-        return repository.findById(id);
+        Restaurant restaurant = restaurantRepository.findById(id);
+
+        List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
+        restaurant.setMenuItems(menuItems);
+
+        return restaurant;
     }
 }

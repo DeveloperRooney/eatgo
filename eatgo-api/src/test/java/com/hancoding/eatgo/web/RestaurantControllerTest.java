@@ -1,5 +1,8 @@
 package com.hancoding.eatgo.web;
 
+import com.hancoding.eatgo.domain.MenuItemRepository;
+import com.hancoding.eatgo.domain.MenuItemRepositoryImpl;
+import com.hancoding.eatgo.domain.RestaurantRepository;
 import com.hancoding.eatgo.domain.RestaurantRepositoryImpl;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -22,8 +25,11 @@ public class RestaurantControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @SpyBean // test에 의존성 주입
-    private RestaurantRepositoryImpl restaurantRepositoryImpl;
+    @SpyBean(RestaurantRepositoryImpl.class) // test에 의존성 주입
+    private RestaurantRepository restaurantRepository;
+
+    @SpyBean(MenuItemRepositoryImpl.class)
+    private MenuItemRepository menuItemRepository;
 
     @Test
     @DisplayName("음식점 리스트")
@@ -34,8 +40,9 @@ public class RestaurantControllerTest {
     
     @Test
     @DisplayName("음식점 상세정보")
-    public void restaurantDetail() throws Exception {
+    public void detail() throws Exception {
         mvc.perform(get("/restaurants/1")).andExpect(status().isOk())
-                .andExpect(content().string(containsString("hancoding")));
+                .andExpect(content().string(containsString("hancoding")))
+                .andExpect(content().string(containsString("Kimchi")));
     }
 }
