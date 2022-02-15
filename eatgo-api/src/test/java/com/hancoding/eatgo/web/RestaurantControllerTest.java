@@ -1,6 +1,7 @@
 package com.hancoding.eatgo.web;
 
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -20,8 +21,16 @@ public class RestaurantControllerTest {
     private MockMvc mvc;
 
     @Test
+    @DisplayName("음식점 리스트")
     public void list() throws Exception {
         mvc.perform(get("/restaurants")).andExpect(status().isOk())
+                .andExpect(content().string(containsString("hancoding")));
+    }
+    
+    @Test
+    @DisplayName("음식점 상세정보")
+    public void restaurantDetail() throws Exception {
+        mvc.perform(get("/restaurants/1")).andExpect(status().isOk())
                 .andExpect(content().string(containsString("hancoding")));
     }
 }
