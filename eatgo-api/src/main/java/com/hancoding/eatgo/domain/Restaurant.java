@@ -7,12 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
 public class Restaurant {
 
-    private final Long id;
-    private final String name;
-    private final String address;
+    private Long id;
+    private String name;
+    private String address;
+
     private List<MenuItem> menuItems = new ArrayList<>();
+
+    public Restaurant(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
 
     public Restaurant(Long id, String name, String address) {
         this.id = id;
@@ -36,5 +43,9 @@ public class Restaurant {
         for (MenuItem menuItem : menuItems) {
             addMenuItem(menuItem);
         }
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

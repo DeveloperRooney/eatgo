@@ -4,10 +4,7 @@ import com.hancoding.eatgo.domain.MenuItem;
 import com.hancoding.eatgo.domain.MenuItemRepository;
 import com.hancoding.eatgo.domain.Restaurant;
 import com.hancoding.eatgo.domain.RestaurantRepository;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +26,11 @@ public class RestaurantService {
         List<MenuItem> menuItems = menuItemRepository.findAllByRestaurantId(id);
         restaurant.setMenuItems(menuItems);
 
+        return restaurant;
+    }
+
+    public Restaurant addRestaurant(Restaurant restaurant) {
+        restaurant.setId(1L);
         return restaurant;
     }
 }
