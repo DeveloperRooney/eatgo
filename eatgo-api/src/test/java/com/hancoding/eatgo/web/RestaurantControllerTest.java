@@ -4,6 +4,7 @@ import com.hancoding.eatgo.domain.MenuItemRepository;
 import com.hancoding.eatgo.domain.MenuItemRepositoryImpl;
 import com.hancoding.eatgo.domain.RestaurantRepository;
 import com.hancoding.eatgo.domain.RestaurantRepositoryImpl;
+import com.hancoding.eatgo.service.RestaurantService;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
@@ -24,6 +25,9 @@ public class RestaurantControllerTest {
 
     @Autowired
     private MockMvc mvc;
+
+    @SpyBean(RestaurantService.class)
+    private RestaurantService restaurantService;
 
     @SpyBean(RestaurantRepositoryImpl.class) // test에 의존성 주입
     private RestaurantRepository restaurantRepository;

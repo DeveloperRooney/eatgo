@@ -1,9 +1,6 @@
 package com.hancoding.eatgo.service;
 
-import com.hancoding.eatgo.domain.MenuItemRepository;
-import com.hancoding.eatgo.domain.Restaurant;
-import com.hancoding.eatgo.domain.RestaurantRepository;
-import com.hancoding.eatgo.domain.RestaurantRepositoryImpl;
+import com.hancoding.eatgo.domain.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,19 +12,27 @@ import static org.junit.Assert.*;
 public class RestaurantServiceTest {
 
     private RestaurantService restaurantService;
-    RestaurantRepository restaurantRepository;
+    private RestaurantRepository restaurantRepository;
+    private MenuItemRepository menuItemRepository;
 
     @Before
     public void setUp() {
         restaurantRepository = new RestaurantRepositoryImpl();
-        restaurantService = new RestaurantService(restaurantRepository);
+        menuItemRepository = new MenuItemRepositoryImpl();
+        restaurantService = new RestaurantService(restaurantRepository, menuItemRepository);
+    }
+
+    @Test
+    public void getRestaurants() {
+        assertThat(restaurantService.getRestaurants().get(0).getName(), is("hancoding"));
     }
 
     @Test
     public void getRestaurant() {
         Restaurant restaurant = restaurantService.getRestaurant(1L);
+        MenuItem menuItem = restaurant.getMenuItems().get(0);
 
-        assertThat(restaurant.getName(), is("hancoding"));
+        assertThat(menuItem.getName(), is("Kimchi"));
     }
 
 }

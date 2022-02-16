@@ -20,7 +20,7 @@ public class RestaurantController {
 
     @GetMapping("/restaurants")
     public List<Restaurant> list() {
-        return null;
+        return restaurantService.getRestaurants();
     }
 
     @GetMapping("/restaurants/{id}")
