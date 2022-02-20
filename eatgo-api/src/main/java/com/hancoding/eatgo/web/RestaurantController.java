@@ -1,9 +1,6 @@
 package com.hancoding.eatgo.web;
 
-import com.hancoding.eatgo.domain.MenuItem;
-import com.hancoding.eatgo.domain.MenuItemRepository;
 import com.hancoding.eatgo.domain.Restaurant;
-import com.hancoding.eatgo.domain.RestaurantRepositoryImpl;
 import com.hancoding.eatgo.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
